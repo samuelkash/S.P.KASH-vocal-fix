@@ -12,11 +12,18 @@ recordBtn.onclick = async () => {
     audioChunks.push(event.data);
   };
 
-  mediaRecorder.onstop = () => {
-    const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-    audioChunks = [];
-    console.log("Recording finished:", audioBlob);
-    alert("Recording complete! (Not uploaded yet)");
+ mediaRecorder.onstop = () => {
+  const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+  audioChunks = [];
+
+  const audioUrl = URL.createObjectURL(audioBlob);
+  const audio = new Audio(audioUrl);
+  audio.play();
+
+  console.log("Recording finished:", audioBlob);
+  alert("Playing back your recording");
+};
+
   };
 
   mediaRecorder.start();
