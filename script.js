@@ -42,26 +42,17 @@ stopBtn.onclick = () => {
   }
 };
 
-// PROCESS BUTTON
+// PROCESS BUTTON (demo only — no backend yet)
 processBtn.onclick = async () => {
   if (!recordedBlob) {
     alert("Record something first!");
     return;
   }
 
-  alert("Processing… please wait");
+  alert("Processing… (demo only, no AI backend yet)");
 
-  const formData = new FormData();
-  formData.append("audio", recordedBlob);
-  formData.append("style", "clean"); // later we connect this to your dropdown
-
-  // IMPORTANT: Replace YOURSPACE with your Hugging Face Space name
-  const response = await fetch("https://YOURSPACE.hf.space/run/predict", {
-    method: "POST",
-    body: formData
-  });
-
-  const resultBlob = await response.blob();
+  // Fake "processed" audio by reusing the same blob
+  const resultBlob = recordedBlob;
   const resultUrl = URL.createObjectURL(resultBlob);
 
   const processedPlayer = document.createElement("audio");
@@ -70,5 +61,6 @@ processBtn.onclick = async () => {
 
   document.body.appendChild(processedPlayer);
 
-  alert("Processed audio ready below");
+  alert("Processed audio (demo) ready below");
 };
+
